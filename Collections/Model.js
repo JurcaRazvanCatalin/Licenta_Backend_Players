@@ -10,6 +10,9 @@ const playerSchema = new mongoose.Schema({
   teamName: {
     type: String,
   },
+  teamNameSmall: {
+    type: String,
+  },
   playerImg: {
     type: String,
   },

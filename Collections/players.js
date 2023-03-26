@@ -4,7 +4,12 @@ const Player = require("./Model");
 const playerRouter = express.Router();
 
 const getAllPlayers = async (req, res) => {
-  const players = await Player.find({});
+  const { teamNameSmall } = req.query;
+  const queryParams = {};
+  if (teamNameSmall) {
+    queryParams.teamNameSmall = teamNameSmall;
+  }
+  const players = await Player.find(queryParams);
   res.status(StatusCodes.OK).json({ players });
 };
 
@@ -24,7 +29,7 @@ const deletePlayer = async (req, res) => {
 
 playerRouter.route("/create-player").get(getAllPlayers);
 playerRouter
-  .route("/create-player:playerNameSmall")
+  .route("/create-player/:playerNameSmall")
   .get(getPlayer)
   .delete(deletePlayer);
 

@@ -73,6 +73,17 @@ const scrapeDescriptionPage = async (url, page) => {
     const teamName = $(
       "#app > div:nth-child(2) > div > div > div.team-header > div.text-center > a > img"
     ).attr("alt");
+    const teamNameSmall = $(
+      "#app > div:nth-child(2) > div > div > div.team-header > div.text-center > a > img"
+    )
+      .attr("alt")
+      .toLowerCase()
+      .replace(" ", "")
+      .replace(" ", "")
+      .replace("-", "")
+      .replace(/["]/g, "")
+      .replace("constanța", "")
+      .replace(" ", "");
     const playerImg = $(
       "#app > div:nth-child(3) > div > div:nth-child(1) > div > div:nth-child(1) > div > div > img:nth-child(1)"
     ).attr("src");
@@ -167,6 +178,7 @@ const scrapeDescriptionPage = async (url, page) => {
       playerName,
       playerNameSmall,
       teamName,
+      teamNameSmall,
       position,
       playerImg,
       playerCountry,
