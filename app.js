@@ -9,7 +9,7 @@ const collectionService = require("./Collections/Service");
 require("dotenv").config();
 const app = express();
 mongoose.set("strictQuery", true);
-const PORT = 3000 || process.env.PORT;
+const PORT = process.env.PORT;
 const fs = require("fs");
 
 const createPlayer = async (player) => {
@@ -101,6 +101,7 @@ const scrapeDescriptionPage = async (url, page) => {
     )
       .text()
       .trim();
+    // console.log(matchDate)
     let height = $(
       "#app > div:nth-child(3) > div > div:nth-child(1) > div > div:nth-child(1) > div > div > ul > li:nth-child(2)"
     )
@@ -212,7 +213,7 @@ const startServer = () => {
 };
 
 const database = () => {
-  mongoose.connect("mongodb://localhost:27017", () =>
+  mongoose.connect(process.env.MONGO_URI, () =>
     console.log("Connected to Database")
   );
 };
@@ -242,4 +243,4 @@ const startApp = () => {
 
 startApp();
 
-// cron.schedule("0/15 * * * * *", main, {});
+cron.schedule("0 1 * * *", main, {});
